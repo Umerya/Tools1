@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Tools Hub - Your One-Stop Solution for Online Tools</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --info-color: #0dcaf0;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+
+        /* Header Styles */
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Tool Cards */
+        .tool-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .tool-card .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .tool-card .card-text {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        /* Category Cards */
+        .category-card {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .category-card:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .category-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            font-size: 1.25rem;
+            transition: color 0.3s ease;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .search-section {
+                padding: 1rem;
+            }
+            
+            .tool-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .loading::after {
+            content: "";
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-primary text-white py-3">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-tools me-2"></i>
+                    Multi-Tools Hub
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                Categories
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#image-tools">Image Tools</a></li>
+                                <li><a class="dropdown-item" href="#seo-tools">SEO Tools</a></li>
+                                <li><a class="dropdown-item" href="#text-tools">Text Tools</a></li>
+                                <li><a class="dropdown-item" href="#developer-tools">Developer Tools</a></li>
+                                <li><a class="dropdown-item" href="#calculators">Calculators</a></li>
+                                <li><a class="dropdown-item" href="#converters">Converters</a></li>
+                                <li><a class="dropdown-item" href="#security-tools">Security Tools</a></li>
+                                <li><a class="dropdown-item" href="#social-tools">Social Media Tools</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <input type="text" id="toolSearch" class="form-control form-control-lg" placeholder="Search for tools...">
+                        <button class="btn btn-light" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories-section mb-5">
+            <h2 class="text-center mb-4">Browse by Category</h2>
+            <div class="row g-4" id="categories-container">
+                <!-- Categories will be dynamically loaded -->
+            </div>
+        </section>
+
+        <!-- Tools Grid -->
+        <section class="tools-section">
+            <h2 class="text-center mb-4">All Tools</h2>
+            <div class="row g-4" id="tools-container">
+                <!-- Tools will be dynamically loaded -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>About Multi-Tools Hub</h5>
+                    <p>Your one-stop solution for all online tools. We provide a comprehensive collection of free tools to help you with various tasks.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#categories" class="text-white">Categories</a></li>
+                        <li><a href="#popular-tools" class="text-white">Popular Tools</a></li>
+                        <li><a href="#contact" class="text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 Multi-Tools Hub. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white me-3">Privacy Policy</a>
+                    <a href="#" class="text-white me-3">Terms of Service</a>
+                    <a href="#" class="text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Tool Categories
+        const categories = [
+            {
+                id: 'image-tools',
+                name: 'Image Tools',
+                icon: 'fas fa-image',
+                tools: [
+                    { id: 'image-to-png', name: 'Image to PNG Converter', description: 'Convert images to PNG format' },
+                    { id: 'image-to-jpg', name: 'Image to JPG Converter', description: 'Convert images to JPG format' },
+                    { id: 'image-resizer', name: 'Image Resizer', description: 'Resize images to desired dimensions' },
+                    { id: 'image-compressor', name: 'Image Compressor', description: 'Compress images while maintaining quality' },
+                    { id: 'image-cropper', name: 'Image Cropper', description: 'Crop images to desired dimensions' }
+                ]
+            },
+            {
+                id: 'seo-tools',
+                name: 'SEO Tools',
+                icon: 'fas fa-search',
+                tools: [
+                    { id: 'meta-tag-generator', name: 'Meta Tag Generator', description: 'Generate SEO meta tags' },
+                    { id: 'keyword-density', name: 'Keyword Density Checker', description: 'Check keyword density in text' },
+                    { id: 'sitemap-generator', name: 'Sitemap Generator', description: 'Generate XML sitemaps' },
+                    { id: 'robots-txt-generator', name: 'Robots.txt Generator', description: 'Generate robots.txt file' },
+                    { id: 'google-index-checker', name: 'Google Index Checker', description: 'Check if your page is indexed by Google' }
+                ]
+            },
+            {
+                id: 'text-tools',
+                name: 'Text Tools',
+                icon: 'fas fa-font',
+                tools: [
+                    { id: 'word-counter', name: 'Word Counter', description: 'Count words and characters in text' },
+                    { id: 'case-converter', name: 'Case Converter', description: 'Convert text case (uppercase, lowercase, etc.)' },
+                    { id: 'plagiarism-checker', name: 'Plagiarism Checker', description: 'Check text for plagiarism' },
+                    { id: 'grammar-checker', name: 'Grammar Checker', description: 'Check text for grammar errors' },
+                    { id: 'text-to-speech', name: 'Text to Speech', description: 'Convert text to speech' }
+                ]
+            }
+        ];
+
+        // Render Categories
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = categories.map(category => `
+                <div class="col-md-4 col-sm-6">
+                    <div class="category-card">
+                        <i class="${category.icon}"></i>
+                        <h5>${category.name}</h5>
+                        <p class="mb-0">${category.tools.length} tools</p>
+                        <a href="#${category.id}" class="btn btn-outline-primary mt-2">View Tools</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render Tools
+        function renderTools() {
+            const container = document.getElementById('tools-container');
+            const allTools = categories.flatMap(category => category.tools);
+            
+            container.innerHTML = allTools.map(tool => `
+                <div class="col-md-4 col-sm-6">
+                    <div class="card tool-card">
+                        <div class="card-body">
+                            <h5 class="card-title">${tool.name}</h5>
+                            <p class="card-text">${tool.description}</p>
+                            <a href="#" class="btn btn-primary" onclick="showTool('${tool.id}')">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Search Functionality
+        function setupSearch() {
+            const searchInput = document.getElementById('toolSearch');
+            const toolsContainer = document.getElementById('tools-container');
+            
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const allTools = categories.flatMap(category => category.tools);
+                
+                const filteredTools = allTools.filter(tool => 
+                    tool.name.toLowerCase().includes(searchTerm) || 
+                    tool.description.toLowerCase().includes(searchTerm)
+                );
+                
+                toolsContainer.innerHTML = filteredTools.map(tool => `
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card tool-card">
+                            <div class="card-body">
+                                <h5 class="card-title">${tool.name}</h5>
+                                <p class="card-text">${tool.description}</p>
+                                <a href="#" class="btn btn-primary" onclick="showTool('${tool.id}')">Use Tool</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        // Show Tool Function
+        function showTool(toolId) {
+            alert(`Tool ${toolId} will be implemented here.`);
+            // This function will be expanded to show the actual tool interface
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategories();
+            renderTools();
+            setupSearch();
+        });
+    </script>
+</body>
+</html> 
